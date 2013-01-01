@@ -1,0 +1,30 @@
+<%= form_tag check_in_path do %>
+  <div>
+    <h4>Passenger Information</h4>
+  </div>
+  <div>
+    <%= text_field :passenger_info, :first_name, :placeholder => 'First name' %>
+  </div>
+  <div>
+    <%= text_field :passenger_info, :last_name, :placeholder => 'Last name' %>
+  </div>
+  <div>
+    <%= text_field :passenger_info, :confirmation_number, :placeholder => 'Confirmation number' %>
+  </div>
+  <div>
+    <%= text_field :passenger_info, :email, :placeholder => 'Email' %>
+  </div>
+  <div>
+    <%= label :passenger_info, :date, 'Check in time' %>
+    <%= select :passenger_info, :date, PassengerInformation::DAYS %>
+  </div>
+  <div class='input-append bootstrap-timepicker-component' style='display: inline;'>
+    <input id='passenger_info_time' name='passenger_info[time]' class='timepicker input-small' type='text' />
+  </div>
+  <div>
+  <%= select :passenger_info, :zone, ActiveSupport::TimeZone.us_zones, :selected => 'Pacific Time (US & Canada)' %>
+  </div>
+  <div>
+    <%= button_tag 'Check In', :class => 'btn btn-info' %>
+  </div>
+<% end %>
