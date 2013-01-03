@@ -11,7 +11,7 @@
   <div>
     <%= text_field :passenger_info, :confirmation_number, :placeholder => 'Confirmation number' %>
   </div>
-  <div>
+  <div id="email">
     <%= text_field :passenger_info, :email, :placeholder => 'Email' %>
   </div>
   <div>
@@ -22,7 +22,7 @@
     <input id='passenger_info_time' name='passenger_info[time]' class='timepicker' type='text' />
   </div>
   <div>
-  <%= select :passenger_info, :zone, ActiveSupport::TimeZone.us_zones, :selected => 'Pacific Time (US & Canada)' %>
+  <%= select :passenger_info, :zone, ActiveSupport::TimeZone.us_zones, :selected => '(GMT-08:00) Pacific Time (US & Canada)' %>
   </div>
   <div>
     <%= button_tag 'Check In', :class => 'btn btn-info' %>

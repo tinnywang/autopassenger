@@ -7,21 +7,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
   <div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">autopassenger</a>
+        <ul class="nav">
+          <li><a href="https://github.com/tinnywang/autopassenger" target="_blank">GitHub</a></li>
+          <li><a href="http://www.southwest.com/" target="_blank">Southwest Airlines</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div class="container">
-  <a class="brand" href="#">autopassenger</a>
-  <ul class="nav">
-  <li><a href="#">github</a></li>
-  </ul>
+    <div class="content">
+      <div class="wrapper">
+        <div class="proper-content">
+          <div class="row span12">
+            <% if flash[:notice] %>
+              <div class="alert alert-info"><b>Success! </b><%= flash[:notice] %></div>
+            <% elsif flash[:error] %>
+              <div class="alert alert-error"><b>Oops! </b><%= flash[:error] %></div>
+            <% end %>
+            <%= yield %>
+          </div>
+        </div>
+        <div class="push"></div>
+      </div>
+      <div class="footer">
+        <p class="muted">Southwest Airlines is not affiliated with AutoPassenger.</p>
+      </div>
+    </div>
   </div>
-  </div>
-  </div>
-  <% if flash[:notice] %>
-    <div class="alert alert-info"><%= flash[:notice] %></div>
-  <% end %>
-<%= yield %>
-</div>
 </body>
 </html>

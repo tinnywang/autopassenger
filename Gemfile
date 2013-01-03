@@ -20,7 +20,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'daemons'
 gem 'delayed_job', :git => 'git://github.com/stympy/delayed_job.git'
 gem 'mechanize'
 gem 'bootstrap-timepicker-rails'

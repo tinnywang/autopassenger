@@ -22,4 +22,14 @@ $(document).ready(function() {
     showInputs: false,
     disableFocus: true
   });
+
+  $('#email').popover({
+    html: true,
+    placement: 'right',
+    trigger: 'hover',
+    title: 'Why should I provide my email?',
+    content: "We'll email your boarding pass to you.  We won't use your email for any other purpose.  If you don't receive an email from AutoPassenger shortly after your check in time, you should check in through <a href='http://www.southwest.com/flight/retrieveCheckinDoc.html'>Southwest Airlines</a>."
+  });
 });
+
+

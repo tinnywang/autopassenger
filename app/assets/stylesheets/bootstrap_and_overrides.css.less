@@ -1,11 +1,30 @@
 @import "twitter/bootstrap/bootstrap";
 
+html, .container, .content {
+  height: 100%;
+}
+
+.container, .content {
+  position: relative;
+}
+
 body {
-  padding-top: 60px;
+  height: 100%;
   background: url(../clouds.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
+}
+
+.proper-content {
+  padding-top: 60px;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0px auto -40px;
 }
 
 form {
@@ -20,12 +39,17 @@ background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 padding: 19px 29px 29px;
 max-width: 225px;
-margin: 0px auto 20px;
+margin: 20px auto 0px;
 }
 
-.bootstrap-timepicker-component {
-padding-bottom: 20px;
+.push {
+  height: 40px;
 }
+
+.footer {
+  height: 40px;
+}
+
 
 @import "twitter/bootstrap/responsive";
 

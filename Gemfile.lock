@@ -148,7 +148,6 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-timepicker-rails
   coffee-rails (~> 3.2.1)
-  daemons
   delayed_job!
   jquery-rails
   less-rails
