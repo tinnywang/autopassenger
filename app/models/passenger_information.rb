@@ -3,7 +3,18 @@ class PassengerInformation
   URL = 'http://www.southwest.com/flight/retrieveCheckinDoc.html'
   DATE_FORMAT = '%m/%d/%Y'
   DAYS = [Time.now.strftime(DATE_FORMAT), (Time.now + 1.day).strftime(DATE_FORMAT)]
-  TIME_ZONES = ActiveSupport::TimeZone.us_zones.select { |zone| zone =~ /\(US & Canada\)|Alaska|Hawaii/ }
+  TIME_ZONES = {}
+  ActiveSupport::TimeZone.us_zones.each do |zone|
+    zone = zone.to_s
+    index = zone =~ /\s\(US & Canada\)/
+    if index
+      matches = zone.match('\(\w*(?<offset>.?\d+:\d{2})\)\s(?<zone>.*)\s\(US & Canada\)')
+      TIME_ZONES[matches[:zone]] = matches[:offset]
+    else
+      matches = zone.match('\(\w*(?<offset>.?\d+:\d{2})\)\s(?<zone>.*)')
+      TIME_ZONES[matches[:zone]] = matches[:offset]
+    end
+  end
 
   attr_accessor :first_name, :last_name, :confirmation_number, :check_in_time, :email
 
@@ -14,12 +25,13 @@ class PassengerInformation
       @confirmation_number = passenger_info[:confirmation_number]
       date = passenger_info[:date].split('/')
       time = passenger_info[:time].match('(?<hour>\d{1,2})\:(?<minute>\d{1,2})\ (?<meridian>\S{2})')
-      zone = passenger_info[:zone].match('(.?\d+:\d{2})')[0]
+      zone = TIME_ZONES[passenger_info[:zone]]
       if time[:meridian].downcase == 'pm'
         hour = time[:hour].to_i + 12
+      else
+        hour = time[:hour]
       end
-      @check_in_time = Time.new(date[2], date[0], date[1], hour, time[:minute], 0, zone).utc
-      #@check_in_time = Time.local(date[2], date[0], date[1], hour, time[:minute])
+      @check_in_time = Time.new(date[2], date[0], date[1], hour, time[:minute], 0, zone)
       @email = passenger_info[:email]
     end
   end

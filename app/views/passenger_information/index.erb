@@ -22,7 +22,7 @@
     <input id='passenger_info_time' name='passenger_info[time]' class='timepicker' type='text' />
   </div>
   <div>
-  <%= select :passenger_info, :zone, ActiveSupport::TimeZone.us_zones, :selected => '(GMT-08:00) Pacific Time (US & Canada)' %>
+  <%= select :passenger_info, :zone, PassengerInformation::TIME_ZONES.keys, :selected => 'Pacific Time' %>
   </div>
   <div>
     <%= button_tag 'Check In', :class => 'btn btn-info' %>
