@@ -13,7 +13,9 @@ class PassengerInformationController < ApplicationController
       flash[:error] = 'You left the following fields blank: ' + flash[:error][2..-1] + '.'
     else
       passenger_info = PassengerInformation.new(passenger_info)
-      passenger_info.check_in
+      spawn_block :method => :fork, :kill => false do
+        passenger_info.check_in
+      end
       flash[:notice] = "We'll check you in and email your boarding pass to you. Refresh or leave this page at your leisure!"
     end  
   redirect_to root_path

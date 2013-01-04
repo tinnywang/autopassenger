@@ -13,6 +13,8 @@ group :production do
   gem 'pg'
 end
 
+gem 'delayed_job', :git => 'git://github.com/stympy/delayed_job.git'
+gem 'spawn', :git => 'git://github.com/rfc2822/spawn'
 gem 'twitter-bootstrap-rails'
 
 # Gems used only for assets and not required
@@ -26,7 +28,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'delayed_job', :git => 'git://github.com/stympy/delayed_job.git'
 gem 'mechanize'
 gem 'bootstrap-timepicker-rails'
 

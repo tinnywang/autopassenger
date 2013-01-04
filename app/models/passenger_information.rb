@@ -31,38 +31,32 @@ class PassengerInformation
       else
         hour = time[:hour]
       end
-      @check_in_time = Time.new(date[2], date[0], date[1], hour, time[:minute], 0, zone)
+      @check_in_time = Time.new(date[2], date[0], date[1], hour, time[:minute], 0, zone).utc
       @email = passenger_info[:email]
     end
   end
 
   def check_in
-    BoardingPassMailer.boarding_pass(self, 'fake url').deliver
-    #mech = Mechanize.new
-    #mech.get(URL) do |page|
-      # poll until we successfully check-in
+    mech = Mechanize.new
+    mech.get(URL) do |page|
+      sleep_time = @check_in_time - Time.now.utc
+      if sleep_time > 30
+        sleep(sleep_time)
+      end
       #begin
-        #result = page.form_with(:id => 'itineraryLookup') do |form|
-          #form.confirmationNumber = @confirmation_number
-          #form.firstName = @first_name
-          #form.lastName = @last_name
-        #end.submit
+      #  result = page.form_with(:id => 'itineraryLookup') do |form|
+      #    form.confirmationNumber = @confirmation_number
+      #    form.firstName = @first_name
+      #    form.lastName = @last_name
+      #    end.submit
       #end while result.at('#printDocumentsButton').blank?
       #mech.page.form_with(:id => 'checkinOptions') do |form|
-        #form.click_button(form.button_with(:id => 'printDocumentsButton'))
+      #  form.click_button(form.button_with(:id => 'printDocumentsButton'))
       #end
       # email the boarding pass
       #url = mech.page.uri.to_s
       #BoardingPassMailer.boarding_pass(self, url).deliver
-    #end
-  end
-  handle_asynchronously :check_in, :run_at => Proc.new { |info| info.run_at }
-
-  def run_at
-    if @check_in_time - Time.now.utc > 30
-      return @check_in_time - 30
-    else
-      return Time.now.utc
+      BoardingPassMailer.boarding_pass(self, 'fake_url').deliver
     end
   end
 end

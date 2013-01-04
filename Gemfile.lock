@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/rfc2822/spawn
+  revision: ca0cf371ad02f0679ad26ce5bc9c7a9337569982
+  specs:
+    spawn (1.0.1)
+
+GIT
   remote: git://github.com/stympy/delayed_job.git
   revision: cdae1d256ed1fd206de1fb6ac86b838d93a4b883
   specs:
@@ -156,6 +162,7 @@ DEPENDENCIES
   pg
   rails (= 3.2.9)
   sass-rails (~> 3.2.3)
+  spawn!
   sqlite3
   therubyracer
   twitter-bootstrap-rails
