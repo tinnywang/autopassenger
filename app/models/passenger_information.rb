@@ -43,20 +43,18 @@ class PassengerInformation
       if sleep_time > 30
         sleep(sleep_time)
       end
-      #begin
-      #  result = page.form_with(:id => 'itineraryLookup') do |form|
-      #    form.confirmationNumber = @confirmation_number
-      #    form.firstName = @first_name
-      #    form.lastName = @last_name
-      #    end.submit
-      #end while result.at('#printDocumentsButton').blank?
-      #mech.page.form_with(:id => 'checkinOptions') do |form|
-      #  form.click_button(form.button_with(:id => 'printDocumentsButton'))
-      #end
-      # email the boarding pass
-      #url = mech.page.uri.to_s
-      #BoardingPassMailer.boarding_pass(self, url).deliver
-      BoardingPassMailer.boarding_pass(self, 'fake_url').deliver
+      begin
+        result = page.form_with(:id => 'itineraryLookup') do |form|
+          form.confirmationNumber = @confirmation_number
+          form.firstName = @first_name
+          form.lastName = @last_name
+        end.submit
+      end while result.at('#printDocumentsButton').blank?
+      mech.page.form_with(:id => 'checkinOptions') do |form|
+        form.click_button(form.button_with(:id => 'printDocumentsButton'))
+      end
+      url = mech.page.uri.to_s
+      BoardingPassMailer.boarding_pass(self, url).deliver
     end
   end
 end
